@@ -11,10 +11,17 @@ services:
       - /app/node_modules
   mongo:
     image: 'mongo'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+      MONGO_INITDB_DATABASE: reza-pack
+      MONGO_INITDB_TEST_DATABASE: test-reza-pack
     ports:
       - '27017:27017'
     volumes:
       - mongo-data:/data/db
+      - mongo-config:/data/configdb
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
   swagger:
     image: 'swaggerapi/swagger-ui'
     ports:
@@ -25,3 +32,4 @@ services:
       - ./swagger.json:/api-json/swagger.json
 volumes:
   mongo-data:
+  mongo-config:
