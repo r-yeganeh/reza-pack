@@ -1,0 +1,27 @@
+version: '3'
+services:
+  order:
+    build: .
+    ports:
+      - '3000:3000'
+    depends_on:
+      - mongo
+    volumes:
+      - .:/app
+      - /app/node_modules
+  mongo:
+    image: 'mongo'
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongo-data:/data/db
+  swagger:
+    image: 'swaggerapi/swagger-ui'
+    ports:
+      - '4000:8080'
+    environment:
+      SWAGGER_JSON: /api-json
+    volumes:
+      - ./swagger.json:/api-json/swagger.json
+volumes:
+  mongo-data:
