@@ -13,7 +13,7 @@ export const createTestingModule = async () => {
       OrderService,
       {
         provide: getModelToken('Order'), // Use getModelToken to provide OrderModel
-        useValue: {}, // Mock OrderModel or use a real one if available
+        useValue: Model, // Mock OrderModel or use a real one if available
       },
       {
         provide: 'PriceCalculatorInterface',
