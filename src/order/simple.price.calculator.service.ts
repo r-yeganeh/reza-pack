@@ -1,11 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { PriceCalculatorInterface } from './interface/PriceCalculatorInterface';
 import { Package } from './schemas/order.schema';
-const FREE_TIER_VOLUME_LIMIT = 5000;
-const VOLUME_INCREMENT_STEP = 5000;
-const BASE_PACKAGE_PRICE = 1;
-const VOLUME_INCREMENT_PRICE = 0.5;
-const WEIGHT_UNIT_PRICE = 0.1;
+
+export const FREE_TIER_VOLUME_LIMIT = 5000;
+export const VOLUME_INCREMENT_STEP = 5000;
+export const BASE_PACKAGE_PRICE = 1;
+export const VOLUME_INCREMENT_UNIT_PRICE = 0.5;
+export const WEIGHT_UNIT_PRICE = 0.1;
 
 @Injectable()
 export class SimplePriceCalculator implements PriceCalculatorInterface {
@@ -18,7 +19,7 @@ export class SimplePriceCalculator implements PriceCalculatorInterface {
       const extraVolumeCost =
         volume < FREE_TIER_VOLUME_LIMIT
           ? 0
-          : Math.floor(volume / VOLUME_INCREMENT_STEP) * VOLUME_INCREMENT_PRICE;
+          : Math.floor(volume / VOLUME_INCREMENT_STEP) * VOLUME_INCREMENT_UNIT_PRICE;
       console.log('extraVolumeCost: ', extraVolumeCost);
       const weightCost = weight * WEIGHT_UNIT_PRICE;
       console.log('weightCost: ', weightCost);
