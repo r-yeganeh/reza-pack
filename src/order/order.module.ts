@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { OrderController } from './order.controller';
 import { OrderService } from './order.service';
-import { SimplePriceCalculator } from './simple-price-calculator.service';
+import { SimplePriceCalculator } from './simple.price.calculator.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Order, OrderSchema } from './schemas/order.schema';
 import { CONNECTION_STRING, TEST_CONNECTION_STRING } from '../configuration';
