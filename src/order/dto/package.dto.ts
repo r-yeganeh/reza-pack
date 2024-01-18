@@ -1,5 +1,5 @@
 import { IsNumber, IsPositive } from 'class-validator';
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiProperty } from '@nestjs/swagger';
 
 export class PackageDto {
   @ApiProperty({ default: 50, required: true })

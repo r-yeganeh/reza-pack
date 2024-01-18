@@ -1,7 +1,7 @@
 import { IsEnum, IsNotEmpty } from 'class-validator';
 import { OrderStatus } from '../../types';
-import { ApiProperty } from "@nestjs/swagger";
-import { TransportLabelDto } from "./transport-label.dto";
+import { ApiProperty } from '@nestjs/swagger';
+import { TransportLabelDto } from './transport-label.dto';
 
 export class OrderUpdateDto {
   @ApiProperty({ required: true, default: '' })

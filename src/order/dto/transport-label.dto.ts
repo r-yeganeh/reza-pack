@@ -32,7 +32,7 @@ export class TransportLabelDto {
   @IsNotEmpty()
   name: string;
 
-  @ApiProperty({ default: 'enter', required: true })
+  @ApiProperty({ default: '1234 AB', required: true })
   @IsString()
   @IsNotEmpty()
   @Matches(/^[0-9]{4}\s[A-Z]{2}$/, {

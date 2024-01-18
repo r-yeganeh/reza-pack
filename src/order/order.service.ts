@@ -25,6 +25,7 @@ export class OrderService {
     const totalPrice = this.priceCalculator.calculateTotalPrice(
       orderData.packages,
     );
+    // NOTE: we can also check the fact that pickup and dropoff locations aren't the same
     const order = new this.orderModel({
       dropoff: orderData.dropoff,
       pickup: orderData.pickup,

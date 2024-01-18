@@ -12,7 +12,13 @@ import { OrderCreationDto } from './dto/order-creation.dto';
 import { Types } from 'mongoose';
 import { OrderUpdateDto } from './dto/order-update.dto';
 import { OrderFilterDto } from './dto/order-filter.dto';
-import { ApiBody, ApiHeader, ApiOperation, ApiParam, ApiQuery, ApiTags } from "@nestjs/swagger";
+import {
+  ApiBody,
+  ApiOperation,
+  ApiParam,
+  ApiQuery,
+  ApiTags,
+} from '@nestjs/swagger';
 
 @ApiTags('Order')
 @Controller('orders')
@@ -20,8 +26,10 @@ export class OrderController {
   constructor(private readonly orderService: OrderService) {}
 
   @Post()
-
-  @ApiOperation({ summary: 'create order', description: 'Enter order attributes to create it' })
+  @ApiOperation({
+    summary: 'create order',
+    description: 'Enter order attributes to create it',
+  })
   @ApiBody({ type: OrderCreationDto })
   createOrder(@Body() orderCreationDto: OrderCreationDto) {
     // toDo: authenticate user on a production environment
@@ -61,7 +69,7 @@ export class OrderController {
   @ApiQuery({ name: 'dropoff_address', type: String })
   @Get()
   async getOrders(@Query() orderFilterDto: OrderFilterDto) {
-    // toDo: authenticate user on a production environment
+    // NOTE: authenticate user on a production environment
     console.log('orderFilterDto: ', orderFilterDto);
     const result = await this.orderService.getOrders(orderFilterDto, {
       _id: 1,
