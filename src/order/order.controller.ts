@@ -12,18 +12,29 @@ import { OrderCreationDto } from './dto/order-creation.dto';
 import { Types } from 'mongoose';
 import { OrderUpdateDto } from './dto/order-update.dto';
 import { OrderFilterDto } from './dto/order-filter.dto';
+import { ApiBody, ApiHeader, ApiOperation, ApiParam, ApiQuery, ApiTags } from "@nestjs/swagger";
 
+@ApiTags('Order')
 @Controller('orders')
 export class OrderController {
   constructor(private readonly orderService: OrderService) {}
 
   @Post()
+
+  @ApiOperation({ summary: 'create order', description: 'Enter order attributes to create it' })
+  @ApiBody({ type: OrderCreationDto })
   createOrder(@Body() orderCreationDto: OrderCreationDto) {
     // toDo: authenticate user on a production environment
     console.log('orderCreationDto: ', orderCreationDto);
     return this.orderService.createOrder(orderCreationDto);
   }
 
+  @ApiOperation({
+    summary: 'update order status',
+    description: 'Enter a new valid status for the order',
+  })
+  @ApiParam({ name: '_id', description: 'order id', type: String })
+  @ApiBody({ type: OrderUpdateDto })
   @Patch(':_id/status') // NOTE: I could have also used PUT (but this is a partial update)
   async updateOrderStatus(
     @Param('_id') orderId: Types.ObjectId,
@@ -42,6 +53,12 @@ export class OrderController {
     };
   }
 
+  @ApiOperation({
+    summary: 'get orders by dropoff details',
+    description: 'Enter dropoff zipcode and address',
+  })
+  @ApiQuery({ name: 'dropoff_zipcode', type: String })
+  @ApiQuery({ name: 'dropoff_address', type: String })
   @Get()
   async getOrders(@Query() orderFilterDto: OrderFilterDto) {
     // toDo: authenticate user on a production environment

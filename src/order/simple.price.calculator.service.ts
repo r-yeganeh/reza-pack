@@ -19,7 +19,8 @@ export class SimplePriceCalculator implements PriceCalculatorInterface {
       const extraVolumeCost =
         volume < FREE_TIER_VOLUME_LIMIT
           ? 0
-          : Math.floor(volume / VOLUME_INCREMENT_STEP) * VOLUME_INCREMENT_UNIT_PRICE;
+          : Math.floor(volume / VOLUME_INCREMENT_STEP) *
+            VOLUME_INCREMENT_UNIT_PRICE;
       console.log('extraVolumeCost: ', extraVolumeCost);
       const weightCost = weight * WEIGHT_UNIT_PRICE;
       console.log('weightCost: ', weightCost);
